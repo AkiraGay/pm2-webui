@@ -23,22 +23,22 @@ if(!config.APP_SESSION_SECRET){
 }
 
 // Create App Instance
-const app = new Koa();
+//const app = new Koa();
 const gritty = require('gritty');
-
-// App Settings
+const websockify = require('koa-websocket');
+const app = websockify(new Koa());
 app.proxy = true;
 app.keys = [config.APP_SESSION_SECRET];
 
 // Middlewares
-app.use(session(app));
+app.ws.use(session(app));
 
-app.use(koaBody());
+app.ws.use(koaBody());
 
-app.use(serve(path.join(__dirname, 'public')));
+app.ws.use(serve(path.join(__dirname, 'public')));
 
 const router = require("./routes");
-app.use(router.routes());
+app.ws.use(router.routes());
 
 render(app, {
     root: path.join(__dirname, 'views'),
@@ -49,8 +49,8 @@ render(app, {
 });
 
 // ---- Gritty ----
-app.use(gritty());
-gritty.listen(app, {
+app.ws.use(gritty());
+gritty.listen(app.ws, {
     autoRestart: true, // default
 });
 // ---- WebUI ----
