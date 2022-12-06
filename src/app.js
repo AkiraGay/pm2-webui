@@ -49,10 +49,10 @@ render(app, {
 });
 
 // ---- Gritty ----
-app.ws.use(gritty());
-gritty.listen(app, {
-    autoRestart: true, // default
-});
+// app.ws.use(gritty());
+// gritty.listen(app, {
+//     autoRestart: true, // default
+// });
 // ---- WebUI ----
 app.listen(config.PORT, config.HOST, ()=>{
     console.log(`Application started at http://${config.HOST}:${config.PORT}`)
