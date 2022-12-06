@@ -49,11 +49,8 @@ render(app, {
 });
 
 // ---- Gritty ----
-const io = require('socket.io');
-const socket = io.listen(app);
 app.use(gritty());
-gritty.listen(socket, {
-    command: 'mc', // optional
+gritty.listen(app, {
     autoRestart: true, // default
 });
 // ---- WebUI ----
