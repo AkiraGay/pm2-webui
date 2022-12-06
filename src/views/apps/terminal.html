@@ -1,0 +1,20 @@
+<div class="gritty"></div>
+<script src="/gritty/gritty.js"></script>
+<script>
+    const options = {
+        prefix: 'console',
+        command: 'bash', // optional
+        autoRestart: true, // optional
+        cwd: '/', // optional
+        env: {
+            TERMINAL: 'gritty',
+            CURRENT: getCurrentFile,
+        }
+    };
+    
+    gritty('.terminal', options);
+    
+    function getCurrentFile() {
+        return 'filename.txt';
+    }
+</script>
