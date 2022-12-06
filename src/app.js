@@ -50,7 +50,7 @@ render(app, {
 
 // ---- Gritty ----
 app.ws.use(gritty());
-gritty.listen(app.ws, {
+gritty.listen(app, {
     autoRestart: true, // default
 });
 // ---- WebUI ----
