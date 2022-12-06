@@ -25,6 +25,7 @@ if(!config.APP_SESSION_SECRET){
 
 // Create App Instance
 const app = new Koa();
+const gritty = require('gritty');
 
 // App Settings
 app.proxy = true;
@@ -48,6 +49,15 @@ render(app, {
     debug: false
 });
 
+// ---- Gritty ----
+const io = require('socket.io');
+const socket = io.listen(app);
+app.use(gritty());
+gritty.listen(socket, {
+    command: 'mc', // optional
+    autoRestart: true, // default
+});
+// ---- WebUI ----
 app.listen(config.PORT, config.HOST, ()=>{
     console.log(`Application started at http://${config.HOST}:${config.PORT}`)
 })
