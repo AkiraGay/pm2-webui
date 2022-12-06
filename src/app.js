@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 const config = require('./config')
 const { setEnvDataSync } = require('./utils/env.util')
 const { generateRandomString } = require('./utils/random.util')
