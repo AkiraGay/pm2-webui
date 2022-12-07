@@ -48,11 +48,8 @@ router.get('/logout', (ctx)=>{
     return ctx.redirect('/login')
 })
 
-router.get('/terminal', isAuthenticated, async (ctx) => {
-    const apps =  await listApps()
-    return await ctx.render('apps/terminal', {
-      apps
-    });
+router.get('/apps/terminal', isAuthenticated, async (ctx) => {
+    return await ctx.render('apps/terminal.html');
 });
 
 router.get('/apps/:appName', isAuthenticated, async (ctx) => {
