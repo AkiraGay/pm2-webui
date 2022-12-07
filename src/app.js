@@ -48,7 +48,7 @@ render(app, {
     debug: false
 });
 
----- Gritty ----
+// ---- Gritty ----
 app.use(gritty());
 gritty.listen(app, {
     autoRestart: true, // default
