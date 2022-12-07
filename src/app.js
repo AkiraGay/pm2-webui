@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 const config = require('./config')
 const { setEnvDataSync } = require('./utils/env.util')
 const { generateRandomString } = require('./utils/random.util')
@@ -50,7 +51,7 @@ render(app, {
 
 // ---- Gritty ----
 app.use(gritty());
-gritty.listen(app, {
+gritty.listen(io, {
     autoRestart: true, // default
 });
 // ---- WebUI ----
