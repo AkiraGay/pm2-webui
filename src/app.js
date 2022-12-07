@@ -51,9 +51,9 @@ render(app, {
 });
 
 // ---- webterm ----
-const terminal = require("web-terminal");
+// const terminal = require("web-terminal");
 // ---- WebUI ----
 app.listen(config.PORT, config.HOST, ()=>{
     console.log(`Application started at http://${config.HOST}:${config.PORT}`)
 })
-terminal(io);
+// terminal(io);
