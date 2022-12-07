@@ -25,7 +25,7 @@ if(!config.APP_SESSION_SECRET){
 
 // Create App Instance
 const app = new Koa();
-const io = require('socket.io')(app);
+const io = require('socket.io')(app.callback());
 const gritty = require('gritty');
 
 app.proxy = true;
