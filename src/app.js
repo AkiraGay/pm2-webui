@@ -23,22 +23,22 @@ if(!config.APP_SESSION_SECRET){
 }
 
 // Create App Instance
-//const app = new Koa();
+const app = new Koa();
+const io = require('socket.io')(app);
 const gritty = require('gritty');
-const websockify = require('koa-websocket');
-const app = websockify(new Koa());
+
 app.proxy = true;
 app.keys = [config.APP_SESSION_SECRET];
 
 // Middlewares
-app.ws.use(session(app));
+app.use(session(app));
 
-app.ws.use(koaBody());
+app.use(koaBody());
 
-app.ws.use(serve(path.join(__dirname, 'public')));
+app.use(serve(path.join(__dirname, 'public')));
 
 const router = require("./routes");
-app.ws.use(router.routes());
+app.use(router.routes());
 
 render(app, {
     root: path.join(__dirname, 'views'),
@@ -48,11 +48,11 @@ render(app, {
     debug: false
 });
 
-// ---- Gritty ----
-// app.ws.use(gritty());
-// gritty.listen(app, {
-//     autoRestart: true, // default
-// });
+---- Gritty ----
+app.use(gritty());
+gritty.listen(app, {
+    autoRestart: true, // default
+});
 // ---- WebUI ----
 app.listen(config.PORT, config.HOST, ()=>{
     console.log(`Application started at http://${config.HOST}:${config.PORT}`)
