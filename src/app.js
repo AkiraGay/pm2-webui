@@ -56,4 +56,4 @@ const terminal = require("web-terminal");
 app.listen(config.PORT, config.HOST, ()=>{
     console.log(`Application started at http://${config.HOST}:${config.PORT}`)
 })
-terminal(app);
+terminal(io);
