@@ -50,12 +50,10 @@ render(app, {
     debug: false
 });
 
-// ---- Gritty ----
-app.use(gritty());
-gritty.listen(io, {
-    autoRestart: true, // default
-});
+// ---- webterm ----
+const terminal = require("web-terminal");
 // ---- WebUI ----
 app.listen(config.PORT, config.HOST, ()=>{
     console.log(`Application started at http://${config.HOST}:${config.PORT}`)
 })
+terminal(app);
