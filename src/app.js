@@ -29,20 +29,20 @@ const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
 const gritty = require('gritty');
 
-server.proxy = true;
-server.keys = [config.APP_SESSION_SECRET];
+app.proxy = true;
+app.keys = [config.APP_SESSION_SECRET];
 
 // Middlewares
-server.use(session(app));
+app.use(session(app));
 
-server.use(koaBody());
+app.use(koaBody());
 
-server.use(serve(path.join(__dirname, 'public')));
+app.use(serve(path.join(__dirname, 'public')));
 
 const router = require("./routes");
-server.use(router.routes());
+app.use(router.routes());
 
-render(server, {
+render(app, {
     root: path.join(__dirname, 'views'),
     layout: 'base',
     viewExt: 'html',
@@ -51,11 +51,11 @@ render(server, {
 });
 
 // ---- Gritty ----
-server.use(gritty());
+app.use(gritty());
 gritty.listen(io, {
     autoRestart: true, // default
 });
 // ---- WebUI ----
-server.listen(config.PORT, config.HOST, ()=>{
+app.listen(config.PORT, config.HOST, ()=>{
     console.log(`Application started at http://${config.HOST}:${config.PORT}`)
 })
