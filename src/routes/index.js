@@ -49,7 +49,7 @@ router.get('/logout', (ctx)=>{
 })
 
 router.get('/apps/terminal', isAuthenticated, async (ctx) => {
-    return await ctx.render('apps/terminal.html');
+    return await ctx.render('apps/terminal');
 });
 
 router.get('/apps/:appName', isAuthenticated, async (ctx) => {
